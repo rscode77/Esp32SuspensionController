@@ -4,23 +4,23 @@ int calculatePosition(int value)
     case 0:
       return 0;
     case 10:
-      return 20;
+      return 16;
     case 20:
-      return 35;
+      return 32;
     case 30:
-      return 50;
+      return 48;
     case 40:
-      return 65;
+      return 64;
     case 50:
       return 80;
     case 60:
-      return 95;
+      return 96;
     case 70:
-      return 110;
+      return 112;
     case 80:
-      return 125;
+      return 128;
     case 90:
-      return 145;
+      return 144;
     case 100:
       return 160;
     default:

@@ -10,10 +10,10 @@ BluetoothSerial SerialBT;
 
 #define EEPROM_SIZE 2
 
-#define frontLeft 15
-#define frontRight 15
-#define backLeft 15
-#define backRight 15
+int frontLeft = 14;
+int frontRight = 15;
+int backLeft = 15;
+int backRight = 15;
 
 Servo servoFrontLeft;
 Servo servoFrontRight;
@@ -27,16 +27,16 @@ void setup() {
   ESP32PWM::allocateTimer(3);
 
   servoFrontLeft.setPeriodHertz(50);
-  servoFrontLeft.attach(frontLeft, 500, 2400);
+  servoFrontLeft.attach(frontLeft, 500, 2500);
 
   servoFrontRight.setPeriodHertz(50);
-  servoFrontRight.attach(frontRight, 500, 2400);
+  servoFrontRight.attach(frontRight, 500, 2500);
 
   servoBackLeft.setPeriodHertz(50);
-  servoBackLeft.attach(backLeft, 500, 2400);
+  servoBackLeft.attach(backLeft, 500, 2500);
 
   servoBackRight.setPeriodHertz(50);
-  servoBackRight.attach(backRight, 500, 2400);
+  servoBackRight.attach(backRight, 500, 2500);
 
   Serial.begin(115200);
   SerialBT.begin("PatrolSuspensionController"); //Bluetooth device name
@@ -44,15 +44,15 @@ void setup() {
 }
 
 String message = "";
-
+int pos = 0;  
 void loop() {
-  if (Serial.available()) 
+  if (Serial.available())
   {
     SerialBT.write(Serial.read());
   }
   if (SerialBT.available()) {
     char incomingChar = SerialBT.read();
-    if (incomingChar != '\n') 
+    if (incomingChar != '\n')
     {
       message += String(incomingChar);
     }
@@ -62,7 +62,7 @@ void loop() {
 
     Serial.write(incomingChar);
 
-    if (message == "getconfig") 
+    if (message == "getconfig")
     {
       int front = EEPROM.read(0);
       int back = EEPROM.read(1);
@@ -83,10 +83,10 @@ void loop() {
       Serial.println(back);
 
       String result = setServoPosition(front, back);
-      if (result == "Success") {        
+      if (result == "Success") {
         EEPROM.write(0, front);
         EEPROM.write(1, back);
-        EEPROM.commit();        
+        EEPROM.commit();
         SerialBT.println("Success");
       }
       else
