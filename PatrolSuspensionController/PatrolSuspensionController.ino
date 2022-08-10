@@ -10,10 +10,10 @@ BluetoothSerial SerialBT;
 
 #define EEPROM_SIZE 2
 
-int frontLeft = 14;
-int frontRight = 15;
-int backLeft = 15;
-int backRight = 15;
+int frontLeft = 12;
+int frontRight = 27;
+int backLeft = 25;
+int backRight = 32;
 
 Servo servoFrontLeft;
 Servo servoFrontRight;
@@ -44,7 +44,7 @@ void setup() {
 }
 
 String message = "";
-int pos = 0;  
+int pos = 0;
 void loop() {
   if (Serial.available())
   {

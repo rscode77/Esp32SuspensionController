@@ -33,21 +33,23 @@ String setServoPosition(int frontValue, int backValue)
   if (EEPROM.read(0) != frontValue)
   {
     Serial.println(calculatePosition(frontValue));
-    delay(1000);
+    delay(3000);
     servoFrontLeft.write(calculatePosition(frontValue));
-    delay(1000);
+    Serial.print("ok");
+    delay(3000);
     servoFrontRight.write(calculatePosition(frontValue));
-    delay(1000);
+    Serial.print("ok");
   }
 
   if (EEPROM.read(1) != backValue)
   {
     Serial.println(calculatePosition(backValue));
-    delay(1000);
+    delay(3000);   
     servoBackLeft.write(calculatePosition(backValue));
-    delay(1000);
+     Serial.print("ok");
+    delay(3000);
     servoBackRight.write(calculatePosition(backValue));
-    delay(1000);
+    Serial.print("ok");
   }
   return "Success";
 }
